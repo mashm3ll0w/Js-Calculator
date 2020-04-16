@@ -1,0 +1,76 @@
+body {
+	font-size: 1.25rem;
+}
+
+h1 {
+	font-family: "Courier New", Courier, monospace;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/* Calc Container */
+.calc-container {
+	display: grid;
+	border: 5px solid #000;
+	border-radius: 10px;
+	width: 400px;
+	height: 450px;
+	margin: auto;
+	margin-top: 20px;
+	overflow: hidden;
+	background-color: #505050;
+}
+
+/* Display */
+.display {
+	display: grid;
+	height: 0px;
+	max-width: 390px;
+	color: #fff;
+	background-color: #505050;
+  text-align: right;
+  margin-top: 40px;
+  font-size: 2.75rem;
+}
+
+/* All Buttons */
+.calc-buttons {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 400px;
+}
+
+button {
+  transition: ease-in-out, 0.1ms;
+  font-size: 2rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+button:hover {
+	background-color: darkgrey;
+}
+
+.resetBtn {
+  background-color: #ff2424;
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+.equalSign {
+  background-color: #ff2424;
+	grid-column-start: 3;
+	grid-column-end: 5;
+}
+
+.equalSign:hover, .resetBtn:hover{
+  background-color: #d61a1a;
+}
+
+#operator {
+  background-color: #ff9900;
+}
+
+#operator:hover {
+  background-color: #df8600;
+}
