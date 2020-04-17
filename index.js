@@ -15,28 +15,28 @@ let operator = "";
 
 // Define all the operation functions
 function add() {
-	num1 = parseInt(display.textContent);
+	num1 = parseFloat(display.textContent);
 	display.innerHTML = "";
 	operator = "+";
 }
 addBtn.addEventListener("click", add);
 
 function subtract() {
-	num1 = parseInt(display.textContent);
+	num1 = parseFloat(display.textContent);
 	display.innerHTML = "";
 	operator = "-";
 }
 subtractBtn.addEventListener("click", subtract);
 
 function multiply() {
-	num1 = parseInt(display.textContent);
+	num1 = parseFloat(display.textContent);
 	display.innerHTML = "";
 	operator = "x";
 }
 multiplyBtn.addEventListener("click", multiply);
 
 function divide() {
-	num1 = parseInt(display.textContent);
+	num1 = parseFloat(display.textContent);
 	display.innerHTML = "";
 	operator = "/";
 }
@@ -67,7 +67,7 @@ for (let x = 0; x < 10; x++) {
 }
 
 equals.addEventListener("click", function(){
-  num2 = parseInt(display.textContent);
+  num2 = parseFloat(display.textContent);
   let result = operate(num1, num2, operator);
   display.innerHTML = result;
 });
