@@ -1,92 +1,177 @@
-//jshint esversion:6
+// jshint esversion:6
 
-// select necessary buttons and initialize variables
-let display = document.querySelector(".display");
-let resetBtn = document.querySelector(".resetBtn");
-let equals = document.querySelector(".equalSign");
-let deleteBtn = document.querySelector(".deleteBtn");
-let addBtn = document.querySelector(".addOptr");
-let subtractBtn = document.querySelector(".subOptr");
-let multiplyBtn = document.querySelector(".multiOptr");
-let divideBtn = document.querySelector(".divOptr");
-let num1 = 0;
-let num2 = 0;
-let operator = "";
+// Buttons for all selectors
+let resetBtn = document.querySelector(".reset");
+let deleteBtn = document.querySelector(".delete");
+let equalBtn = document.getElementById("equals");
+let divideBtn = document.getElementById("divide");
+let multiplyBtn = document.getElementById("multiply");
+let addBtn = document.getElementById("add");
+let subtractBtn = document.getElementById("subtract");
+let decimalBtn = document.getElementById("decimal");
+let calcDisplay = document.querySelector(".calcDisplay");
 
-// Define all the operation functions
+// operate function
+function operate(x, y, operator) {
+	switch (operator) {
+		case "/":
+			return x / y;
+		case "x":
+			return x * y;
+		case "+":
+			return x + y;
+		case "-":
+			return x - y;
+	}
+}
+
+// basic arithmetic functions
+function divide() {
+	calcDisplay.innerHTML += "/";
+}
+divideBtn.addEventListener("click", divide);
+
+function multiply() {
+	calcDisplay.innerHTML += "x";
+}
+multiplyBtn.addEventListener("click", multiply);
+
 function add() {
-	num1 = parseFloat(display.textContent);
-	display.innerHTML = "";
-	operator = "+";
+	calcDisplay.innerHTML += "+";
 }
 addBtn.addEventListener("click", add);
 
 function subtract() {
-	num1 = parseFloat(display.textContent);
-	display.innerHTML = "";
-	operator = "-";
+	calcDisplay.innerHTML += "-";
 }
 subtractBtn.addEventListener("click", subtract);
 
-function multiply() {
-	num1 = parseFloat(display.textContent);
-	display.innerHTML = "";
-	operator = "x";
+// special key functions [reset, delete and Equals]
+
+function resetDisplay() {
+	calcDisplay.innerHTML = "";
+	decimalBtn.disabled = false;
 }
-multiplyBtn.addEventListener("click", multiply);
 
-function divide() {
-	num1 = parseFloat(display.textContent);
-	display.innerHTML = "";
-	operator = "/";
+function deleteNum() {
+	let contentArr = [...calcDisplay.textContent];
+	contentArr.splice(calcDisplay.textContent.length - 1, 1);
+	calcDisplay.innerHTML = contentArr.join("");
 }
-divideBtn.addEventListener("click", divide);
 
-// define the operation results;
-function operate(num1, num2, operator) {
-	switch (operator) {
-		case "+":
-			return num1 + num2;
+function decimalPlace() {
+	decimalBtn.disabled = true;
+	setTimeout(() => {
+		decimalBtn.disabled = false;
+	}, 5000);
+}
 
-		case "-":
-			return num1 - num2;
+function doMath() {
+	let equation = calcDisplay.textContent;
+	let equationArr = equation.split(/([-\+\x\/])/); // split the equation into an array based on the operator signs
 
-		case "x":
-			return num1 * num2;
-
-		case "/":
-			return num1 / num2;
+	// Solve for division and multiplication
+	for (let x = 0; x < equationArr.length; x++) {
+		if (equationArr[x] === "x" || equationArr[x] === "/") {
+			equationArr[x - 1] = operate(parseFloat(equationArr[x - 1]), parseFloat(equationArr[x + 1]), equationArr[x]);
+			equationArr.splice(x, 2);
+			x -= 2;
+		}
 	}
+
+	// solve for addition and subtraction
+	for (let x = 0; x < equationArr.length; x++) {
+		if (equationArr[x] === "+" || equationArr[x] === "-") {
+			equationArr[x - 1] = operate(parseFloat(equationArr[x - 1]), parseFloat(equationArr[x + 1]), equationArr[x]);
+			equationArr.splice(x, 2);
+			x -= 2;
+		}
+	}
+	calcDisplay.innerHTML = equationArr.join("");
 }
 
-// Add event listener to the numbers
-for (let x = 0; x < 10; x++) {
-	document.querySelector(".num" + x).addEventListener("click", function () {
-		display.innerHTML += this.innerText;
+// reset/clear button
+resetBtn.addEventListener("click", resetDisplay);
+
+// delete button
+deleteBtn.addEventListener("click", deleteNum);
+
+// Equal button
+equalBtn.addEventListener("click", doMath);
+
+// decimal button
+decimalBtn.addEventListener("click", decimalPlace);
+
+// capture all numbers
+for (let x = 0; x < document.querySelectorAll(".number").length; x++) {
+	document.querySelectorAll(".number")[x].addEventListener("click", function () {
+		calcDisplay.innerHTML += this.innerHTML;
 	});
 }
 
-equals.addEventListener("click", function(){
-  num2 = parseFloat(display.textContent);
-  let result = operate(num1, num2, operator);
-  display.innerHTML = result;
+
+// ---------------------- Keyboard Suppport --------------------
+
+document.addEventListener("keydown", function (e) {
+	kbdPress(e.key);
+	//console.log(e.key, e.keyCode);
 });
 
-// Decimal Point
-document.querySelector(".decimal").addEventListener("click", function () {
-	display.innerHTML += this.innerText;
-	this.disabled = true;
-});
-
-// Clear/Reset Button
-resetBtn.addEventListener("click", function () {
-	display.innerHTML = "";
-	document.querySelector(".decimal").disabled = false;
-});
-
-//Delete button
-deleteBtn.addEventListener("click", function () {
-  let numArr = display.textContent.split("");
-  numArr.splice(numArr.length - 1, 1);
-  display.innerHTML = numArr.join("");
-});
+function kbdPress(key) {
+	switch (key) {
+		case "0":
+			calcDisplay.innerHTML += "0";
+			break;
+		case "1":
+			calcDisplay.innerHTML += "1";
+			break;
+		case "2":
+			calcDisplay.innerHTML += "2";
+			break;
+		case "3":
+			calcDisplay.innerHTML += "3";
+			break;
+		case "4":
+			calcDisplay.innerHTML += "4";
+			break;
+		case "5":
+			calcDisplay.innerHTML += "5";
+			break;
+		case "6":
+			calcDisplay.innerHTML += "6";
+			break;
+		case "7":
+			calcDisplay.innerHTML += "7";
+			break;
+		case "8":
+			calcDisplay.innerHTML += "8";
+			break;
+		case "9":
+			calcDisplay.innerHTML += "9";
+			break;
+		case "/":
+			calcDisplay.innerHTML += "/";
+			break;
+		case "*":
+			calcDisplay.innerHTML += "*";
+			break;
+		case "+":
+			calcDisplay.innerHTML += "+";
+			break;
+		case "-":
+			calcDisplay.innerHTML += "-";
+			break;
+		case ".":
+			calcDisplay.innerHTML += ".";
+			break;
+		case "=" || "Enter":
+			doMath();
+			break;
+		case "Backspace":
+			deleteNum();
+			break;
+		case "Escape":
+			resetDisplay();
+			break;
+	}
+}

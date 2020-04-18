@@ -1,76 +1,88 @@
-body {
-	font-size: 1.25rem;
-}
-
-h1 {
+h1, p {
 	font-family: "Courier New", Courier, monospace;
 	text-align: center;
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
 
-/* Calc Container */
-.calc-container {
+.calcContainer {
 	display: grid;
-	border: 5px solid #000;
-	border-radius: 10px;
 	width: 400px;
-	height: 450px;
-	margin: auto;
-	margin-top: 20px;
+	height: 475px;
+	border: 2px solid #000;
+	border-radius: 10px;
+	padding: 3px;
+	margin: 50px auto;
+	background-color: #000;
 	overflow: hidden;
-	background-color: #505050;
 }
 
-/* Display */
-.display {
-	display: grid;
-	height: 0px;
-	max-width: 390px;
+.calcDisplay {
+	background-color: #000;
+	border: 2px solid black;
+	border-radius: 10px;
 	color: #fff;
-	background-color: #505050;
-  text-align: right;
-  margin-top: 40px;
-  font-size: 2.75rem;
+	text-align: right;
+	height: 20px;
+	width: 380px;
+  font-size: 2.5rem;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	margin-top: 40px;
 }
 
-/* All Buttons */
-.calc-buttons {
+.calcBtns {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	width: 400px;
+  width: 400px;
+  margin-top: 2rem;
 }
 
-button {
-  transition: ease-in-out, 0.1ms;
-  font-size: 2rem;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-button:hover {
-	background-color: darkgrey;
-}
-
-.resetBtn {
-  background-color: #ff2424;
+.reset {
+	color: #000;
+	background-color: #fbff00;
 	grid-column-start: 1;
 	grid-column-end: 3;
 }
 
-.equalSign {
-  background-color: #ff2424;
+.reset:hover {
+  background-color: #e6d602;
+}
+
+#equals {
 	grid-column-start: 3;
 	grid-column-end: 5;
 }
 
-.equalSign:hover, .resetBtn:hover{
-  background-color: #d61a1a;
+.operator {
+	background-color: #fbff00;
+	color: #000;
 }
 
-#operator {
-  background-color: #ff9900;
+.operator:hover {
+  background-color: #e6d602;
 }
 
-#operator:hover {
-  background-color: #df8600;
+.delete {
+	background-color: #f00;
+	color: #fff;
+	font-size: 2.25rem;
 }
+
+.delete:hover{
+  background-color: #8f0000;
+  color: #fff;
+}
+
+button {
+	font-size: 3rem;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	font-weight: bold;
+	color: red;
+}
+
+.number:hover {
+	background-color: #ababab;
+	color: #000;
+}
+
+
