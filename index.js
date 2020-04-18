@@ -108,3 +108,70 @@ for (let x = 0; x < document.querySelectorAll(".number").length; x++) {
 		calcDisplay.innerHTML += this.innerHTML;
 	});
 }
+
+
+// ---------------------- Keyboard Suppport --------------------
+
+document.addEventListener("keydown", function (e) {
+	kbdPress(e.key);
+	//console.log(e.key, e.keyCode);
+});
+
+function kbdPress(key) {
+	switch (key) {
+		case "0":
+			calcDisplay.innerHTML += "0";
+			break;
+		case "1":
+			calcDisplay.innerHTML += "1";
+			break;
+		case "2":
+			calcDisplay.innerHTML += "2";
+			break;
+		case "3":
+			calcDisplay.innerHTML += "3";
+			break;
+		case "4":
+			calcDisplay.innerHTML += "4";
+			break;
+		case "5":
+			calcDisplay.innerHTML += "5";
+			break;
+		case "6":
+			calcDisplay.innerHTML += "6";
+			break;
+		case "7":
+			calcDisplay.innerHTML += "7";
+			break;
+		case "8":
+			calcDisplay.innerHTML += "8";
+			break;
+		case "9":
+			calcDisplay.innerHTML += "9";
+			break;
+		case "/":
+			calcDisplay.innerHTML += "/";
+			break;
+		case "*":
+			calcDisplay.innerHTML += "*";
+			break;
+		case "+":
+			calcDisplay.innerHTML += "+";
+			break;
+		case "-":
+			calcDisplay.innerHTML += "-";
+			break;
+		case ".":
+			calcDisplay.innerHTML += ".";
+			break;
+		case "=" || "Enter":
+			doMath();
+			break;
+		case "Backspace":
+			deleteNum();
+			break;
+		case "Escape":
+			resetDisplay();
+			break;
+	}
+}
